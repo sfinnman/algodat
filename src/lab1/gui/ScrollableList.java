@@ -54,10 +54,10 @@ public class ScrollableList implements Drawable, Listener{
 			if (focus){
 				dy += data.p.x*30;
 			}
-			if (dy > maxdy) {
-				dy = maxdy;
-			} else if (dy < 0){
+			if (dy < 0 || maxdy<this.size.y) {
 				dy = 0;
+			} else if (dy > maxdy){
+				dy = maxdy;
 			}
 			break;
 		}

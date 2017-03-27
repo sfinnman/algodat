@@ -31,12 +31,34 @@ public class CaseView {
 			}
 		});
 		int i = 0;
+		new MenuItem("Run of this case", 300, 30, 0, 0, 40){
+
+			@Override
+			protected void subscribeEvents(){
+			}
+			
+			@Override
+			protected void doclick() {
+			}
+			
+		};
 		for (String s : result){
 			l.addListItem(new ListItem(s, 300, 50+50*i, 0, 20, 20));
 			i++;
 		}
 
 		i = 0;
+		new MenuItem("Solution to this case", 800, 30, 0, 0, 40){
+
+			@Override
+			protected void subscribeEvents(){
+			}
+			
+			@Override
+			protected void doclick() {
+			}
+			
+		};
 		for (String s : ResourceLoader.solutions.get(c.name)){
 			l.addListItem(new ListItem(s, 800, 50+50*i, 0, 20, 20));
 			i++;
