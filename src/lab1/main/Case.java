@@ -9,22 +9,25 @@ public class Case {
 	public String name;
 	public int amount;
 	public List<String> persons = new ArrayList<>();
-	public List<List<Integer>> preferences = new ArrayList<>();
+	public List<Integer[]> preferences = new ArrayList<>();
 	public Pair[] pairs;
 	public long runtime;
+	public long ops;
 	
 	
 	public void solve(){
-		runtime = System.currentTimeMillis();
+		runtime = System.nanoTime();
 		Pair[] pairs = new Pair[persons.size()/2];
 		int[] prefcnt = new int[persons.size()/2];
 		Queue<Integer> men = new LinkedList<>();
-		men.addAll(preferences.get(1));
-		
+		for (int i = 0; i< persons.size(); i += 2){
+			men.add(i);
+		}
+		ops = persons.size()/2;
 		while(!men.isEmpty()){
 			int man = men.peek();
-			int woman = preferences.get(man).get(prefcnt[man/2]);
-			int wpref = preferences.get(woman).indexOf(man);
+			int woman = preferences.get(man)[prefcnt[man/2]];
+			int wpref = preferences.get(woman)[man];
 			if (pairs[woman/2] != null && pairs[woman/2].femalepref>wpref){
 				men.add(pairs[woman/2].male);
 				pairs[woman/2] = null;
@@ -37,9 +40,10 @@ public class Case {
 				pairs[woman/2] =  p;
 			}
 			prefcnt[man/2]++;
+			ops++;
 		}
 		this.pairs = pairs;
-		runtime = System.currentTimeMillis() - runtime;
+		runtime = (System.nanoTime() - runtime)/1000;
 	}
 	
 	public static class Pair{

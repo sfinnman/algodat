@@ -13,7 +13,6 @@ import lab1.main.Case.Pair;
 import lab1.main.ResourceLoader;
 import lab1.utility.EventHandler;
 import lab1.utility.EventHandler.EventData;
-import lab1.utility.Point;
 
 public class CaseView {
 
@@ -25,11 +24,13 @@ public class CaseView {
 			}
 		};
 		
+		new MenuItemNC(c.name, Frame.WIDTH/2, 5, 0, 50, 40);
+		
 		ScrollableList l = new ScrollableList(Frame.WIDTH/3, 150, Frame.WIDTH*2/3, Frame.HEIGHT-200){
-			private Queue<ListItem> itemQueue = new LinkedList<>();
+			private Queue<ListItem[]> itemQueue = new LinkedList<>();
 			
 			@Override
-			public void addListItem(ListItem item){
+			public void addListItem(ListItem... item){
 				itemQueue.add(item);
 			}
 			
@@ -76,23 +77,25 @@ public class CaseView {
 				col = Color.RED;
 				incorrect++;
 			}
-			ListItem li = new ListItem(result.get(i), l.size.x/3, 10+50*i, 0, 20, 18);
-			li.setColor(col);
-			l.addListItem(li);
-			li = new ListItem(solution.get(i), (l.size.x*2)/3, 10+50*i, 0, 20, 18);
-			li.setColor(col);
-			l.addListItem(li);
+			ListItem lir = new ListItem(result.get(i), l.size.x/3, 10+50*i, 0, 20, 18);
+			lir.setColor(col);
+			ListItem lis = new ListItem(solution.get(i), (l.size.x*2)/3, 10+50*i, 0, 20, 18);
+			lis.setColor(col);
+			l.addListItem(lir, lis);
 		}
 		
 		new MenuItemNC("Result Statistics", Frame.WIDTH/6, l.p.y-20, 0, 0, 40);
 		
-		new MenuItemNC("Amount Correct: " + correct, Frame.WIDTH/6, 180, 0, 0, 20);
+		new MenuItemNC("Successful: " + correct, Frame.WIDTH/6, 180, 0, 0, 20);
 		
-		new MenuItemNC("Amount Incorrect: " + incorrect, Frame.WIDTH/6, 200, 0, 0, 20);
+		new MenuItemNC("Failed: " + incorrect, Frame.WIDTH/6, 200, 0, 0, 20);
 		
-		new MenuItemNC("Runtime: " + c.runtime/1000.0 + "s", Frame.WIDTH/6, 220, 0, 0, 20);
+		new MenuItemNC("Successrate: " + (correct*100)/(incorrect + correct) + "%", Frame.WIDTH/6, 220, 0, 0, 20);
 		
-		new MenuItemNC("Percentage correct: " + (correct*100)/(incorrect + correct) + "%", Frame.WIDTH/6, 240, 0, 0, 20);
+		new MenuItemNC("Runtime: " + c.runtime/1000.0 + "ms", Frame.WIDTH/6, 240, 0, 0, 20);
+		
+		new MenuItemNC("Operations: " + c.ops, Frame.WIDTH/6, 260, 0, 0, 20);
+		
 		
 	}
 }

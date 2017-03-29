@@ -32,7 +32,6 @@ public class Frame extends JPanel implements MouseListener, KeyListener, MouseMo
 	public Frame() {
 		setFocusable(true);
 		setBackground(Color.BLACK);
-		
 		addMouseListener(this);
 		addKeyListener(this);
 		addMouseMotionListener(this);
@@ -44,7 +43,7 @@ public class Frame extends JPanel implements MouseListener, KeyListener, MouseMo
 			}
 		};
 		t = new Timer();
-		t.schedule(task, 15, 15);
+		t.schedule(task, 40, 40);
 	}
 
 	@Override

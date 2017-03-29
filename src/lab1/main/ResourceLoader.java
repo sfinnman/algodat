@@ -1,7 +1,6 @@
 package lab1.main;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -57,9 +56,14 @@ public class ResourceLoader {
 				c.amount = (Integer.parseInt(m1.group(0)));
 			} else if (m3.find()) {
 				String[] prefs = m3.group(0).split("\\ ");
-				List<Integer> iprefs = new ArrayList<>();
-				for (String token : prefs){
-					iprefs.add(Integer.parseInt(token)-1);
+				Integer[] iprefs = new Integer[c.amount*2];
+				for (int i = 0; i<prefs.length; i++){
+					int token = Integer.parseInt(prefs[i])-1;
+					if (c.preferences.size()%2 == 0){
+						iprefs[i] = token;
+					}else{
+						iprefs[token] = i;
+					}
 				}
 				c.preferences.add(iprefs);
 			} else if (m2.find()) {

@@ -9,7 +9,7 @@ import lab1.main.ResourceLoader;
 
 public class ViewHandler {
 
-	public static final int UPDATE = 10;
+	public static final int UPDATE = 5;
 
 	private ViewHandler() {
 	}

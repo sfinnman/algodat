@@ -32,10 +32,14 @@ public class ScrollableList implements Drawable, Listener{
 		DrawHandler.instance().register(this);
 	}
 	
-	public void addListItem(ListItem item) {
-		listItems.add(item);
-		if (item.p.y + item.size.y > maxdy) {
-			maxdy = item.p.y + item.size.y - this.size.y;
+	public void addListItem(ListItem... items) {
+		for (ListItem item : items){
+			listItems.add(item);
+			int at = item.p.y + item.size.y - this.size.y;
+			dy = (at<0)?0:at;
+			if (at > maxdy) {
+				maxdy = at;
+			}
 		}
 	}
 	
@@ -52,7 +56,7 @@ public class ScrollableList implements Drawable, Listener{
 			break;
 		case ("mouse_scrolled"):
 			if (focus){
-				dy += data.p.x*30;
+				dy += data.p.x*13;
 			}
 			if (dy < 0 || maxdy<this.size.y) {
 				dy = 0;
