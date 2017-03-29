@@ -45,7 +45,7 @@ public class ResourceLoader {
 	private static Case readCase(Scanner sc){
 		Case c = new Case();
 		Pattern p1 = Pattern.compile("(?<=n=)\\d+");
-		Pattern p2 = Pattern.compile("(?<=[0-9]\\ )[a-zA-Z0-9']+");
+		Pattern p2 = Pattern.compile("(?<=[0-9]\\ )[a-zA-Z0-9'\\-]+");
 		Pattern p3 = Pattern.compile("(?<=[0-9]:\\ )[0-9\\ ]+");
 		while(sc.hasNextLine()){
 			String line = sc.nextLine();
@@ -71,8 +71,12 @@ public class ResourceLoader {
 	
 	private static List<String> readSolution(Scanner sc){
 		List<String> solution = new LinkedList<>();
+		Pattern p1 = Pattern.compile("[a-zA-Z0-9'\\-]+\\ \\-\\-\\ [a-zA-Z0-9'\\-]+");
 		while(sc.hasNextLine()){
-			solution.add(sc.nextLine());
+			Matcher m1 = p1.matcher(sc.nextLine());
+			if (m1.find()){
+				solution.add(m1.group(0));
+			}
 		}
 		solution.sort(new Comparator<String>(){
 			@Override

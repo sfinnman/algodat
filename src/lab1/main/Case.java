@@ -11,9 +11,11 @@ public class Case {
 	public List<String> persons = new ArrayList<>();
 	public List<List<Integer>> preferences = new ArrayList<>();
 	public Pair[] pairs;
+	public long runtime;
 	
 	
 	public void solve(){
+		runtime = System.currentTimeMillis();
 		Pair[] pairs = new Pair[persons.size()/2];
 		int[] prefcnt = new int[persons.size()/2];
 		Queue<Integer> men = new LinkedList<>();
@@ -37,6 +39,7 @@ public class Case {
 			prefcnt[man/2]++;
 		}
 		this.pairs = pairs;
+		runtime = System.currentTimeMillis() - runtime;
 	}
 	
 	public static class Pair{

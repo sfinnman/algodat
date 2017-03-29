@@ -54,10 +54,26 @@ public abstract class MenuItem implements Listener, Drawable{
 		int text_size = (focus)?fsize + 6:fsize;
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.WHITE);
-		g2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, text_size));
+		g2.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, text_size));
 		FontMetrics fm = g2.getFontMetrics();
 		int twidth = fm.stringWidth(text);
 		int theight = fm.getHeight();
 		g2.drawString(text, p.x + size.x/2 - twidth/2 , p.y + size.y/2 + theight/3);
+	}
+	
+	public static class MenuItemNC extends MenuItem{
+
+		public MenuItemNC(String text, int x, int y, int sizex, int sizey, int fontSize) {
+			super(text, x, y, sizex, sizey, fontSize);
+		}
+
+		@Override
+		protected void subscribeEvents(){
+		}
+		
+		@Override
+		protected void doclick() {
+		}
+		
 	}
 }

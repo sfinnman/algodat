@@ -13,13 +13,16 @@ public class Main extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	public Main(){
-		add(new Frame());
-		setTitle("MatchMaker X2000");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(Frame.WIDTH + 6, Frame.HEIGHT + 26);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setResizable(false);
+		this.add(new Frame());
+		this.setTitle("MatchMaker X2000");
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        int h = this.getInsets().top + this.getInsets().bottom;
+        int w = this.getInsets().left + this.getInsets().right;
+        System.out.println(w + ", " + h);
+        this.setSize(Frame.WIDTH + w, Frame.HEIGHT + h);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setResizable(false);
 	}
 	
 	public static void main(String[] args) {

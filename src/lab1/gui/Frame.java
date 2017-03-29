@@ -32,6 +32,7 @@ public class Frame extends JPanel implements MouseListener, KeyListener, MouseMo
 	public Frame() {
 		setFocusable(true);
 		setBackground(Color.BLACK);
+		
 		addMouseListener(this);
 		addKeyListener(this);
 		addMouseMotionListener(this);

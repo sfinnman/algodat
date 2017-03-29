@@ -6,7 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import lab1.utility.DrawHandler;
@@ -22,7 +22,7 @@ public class ScrollableList implements Drawable, Listener{
 	private int maxdy = 0;
 	private int dy;
 	private boolean focus;
-	private List<ListItem> listItems = new LinkedList<>();
+	private List<ListItem> listItems = new ArrayList<>();
 	
 	
 	public ScrollableList(int x, int y, int sizex, int sizey){
@@ -67,8 +67,8 @@ public class ScrollableList implements Drawable, Listener{
 	public void draw(Graphics g) {
 		BufferedImage img = new BufferedImage(size.x, size.y, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics gImg = img.getGraphics();
-		for (ListItem item : listItems){
-			item.draw(gImg, dy);
+		for (int i = 0; i<listItems.size(); i++){
+			listItems.get(i).draw(gImg, dy);
 		}
 		g.drawImage(img, p.x, p.y, null);
 	}
@@ -78,18 +78,24 @@ public class ScrollableList implements Drawable, Listener{
 		private final int text_size;
 		private final Point p;
 		private final Point size;
+		private Color c;
 		
 		public ListItem(String text, int x, int y, int sizex, int sizey, int text_size){
 			this.text = text;
 			this.text_size = text_size;
 			this.p = new Point(x, y);
 			this.size = new Point(sizex, sizey);
+			c = Color.WHITE;
+		}
+		
+		public void setColor(Color c){
+			this.c = c;
 		}
 		
 		public void draw(Graphics g, int dy){
 			Graphics2D g2 = (Graphics2D) g;
-			g2.setColor(Color.WHITE);
-			g2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, text_size));
+			g2.setColor(c);
+			g2.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, text_size));
 			FontMetrics fm = g2.getFontMetrics();
 			int twidth = fm.stringWidth(text);
 			int theight = fm.getHeight();
