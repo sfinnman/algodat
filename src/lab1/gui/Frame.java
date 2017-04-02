@@ -123,6 +123,7 @@ public class Frame extends JPanel implements MouseListener, KeyListener, MouseMo
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
+		System.out.println(e.getWheelRotation());
 		EventHandler.instance().triggerEvent("mouse_scrolled", new EventData(this, new Point(e.getUnitsToScroll(), 0)));
 	}
 
