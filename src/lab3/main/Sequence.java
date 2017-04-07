@@ -10,6 +10,7 @@ public class Sequence {
 		genfm(fm, s1, s2, 0);
 		int x = s1.length()-1;
 		int y = s2.length()-1;
+		System.out.println(fm[x][y].val);
 		String s1b = "";
 		String s2b = "";
 		while (x != 0 || y!= 0) {

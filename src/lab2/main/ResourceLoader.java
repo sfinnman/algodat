@@ -1,6 +1,7 @@
 package lab2.main;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class ResourceLoader {
 			if (line.matches("[\"\\ a-zA-Z,\\-]+")){
 				String nasty = line.replaceAll("\\ +$", "");
 				namemapper.put(nasty, g.graph.size());
-				g.graph.add(new LinkedList<>());
+				g.graph.add(new ArrayList<>());
 			} else {
 				String[] tokens = line.split("(\\-\\-)|(\\ \\[)|(\\])");
 				System.out.println(tokens[0] + "," + tokens[1] + ", " + tokens[2]);

@@ -13,18 +13,26 @@ public class Graph {
 	public void solve(int start){
 		
 		boolean [] vertices = new boolean[graph.size()];
+		int[] weights = new int[graph.size()];
+		for (int i = 0; i<weights.length; i++) {
+			weights[i] = Integer.MAX_VALUE;
+		}
 		vertices[start] = true;
 		minspan = new ArrayList<>(graph.size());
-		
 		Queue<Edge> edges = new PriorityQueue<>(graph.get(start));
+		for (Edge e : graph.get(start)) {
+			weights[e.to] = e.weight;
+		}
+		
 		while(minspan.size()<(graph.size()-1)){
 			Edge next = edges.poll();
 			if (!vertices[next.to]){
 				minspan.add(next);
 				vertices[next.to] = true;
 				for (Edge e : graph.get(next.to)){
-					if (!vertices[e.to]) {
+					if (!vertices[e.to] && weights[e.to]>e.weight) {
 						edges.add(e);
+						weights[e.to] = e.weight;
 					}
 				}
 			}

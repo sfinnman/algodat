@@ -7,5 +7,10 @@ public class Main {
 		g.solve(0);
 		System.out.println(g.minspan);
 		System.out.println(g.len);
+		Graph g2 = ResourceLoader.graphs.get("tinyEWG-alpha");
+		g2.solve(0);
+		System.out.println(g2.minspan);
+		System.out.println(g2.len);
+		
 	}
 }
