@@ -32,7 +32,5 @@ public class Main {
 		ResourceLoader.init("src/labflow/resources", fileReader);
 		Graph g = ((Graph)ResourceLoader.resources.get("rail.txt"));
 		g.solve();
-		System.out.println(g.edgeList.get(39));
-		System.out.println(g.edgeList.get(46));
 	}
 }

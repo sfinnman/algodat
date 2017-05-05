@@ -33,16 +33,23 @@ public class Graph {
 		Edge[] p = new Edge[names.size()];
 		maxflow = 0; 
 		while (BFS(p)){
+			StringBuilder sb = new StringBuilder();
 			int pathflow = Integer.MAX_VALUE;
 			int t = names.size()-1;
+			sb.append(p[t].d);
 			while (t>0) {
 				pathflow = Math.min(pathflow, p[t].getCapacity());
+				sb.append("<-(");
+				sb.append(p[t].getCapacity());
+				sb.append(")-");
+				sb.append(p[t].o);
 				t = p[t].o;
 			}
+			System.out.println(sb.toString());
 			maxflow += pathflow;
 			t = names.size()-1;
 		    while(t>0) {
-		    	p[t].f.f += pathflow;
+		    	p[t].addFlow(pathflow);
 		    	t = p[t].o;
 		    }			
 		}
@@ -54,12 +61,7 @@ public class Graph {
 				}
 			}
 		}
-		int flow = 0;
-		for (Edge e: edgeList.get(0)){
-			flow += e.f.f;
-		}
-		
-		System.out.println(flow);
+		System.out.println(maxflow);
 	}
 	
 	private boolean BFS(Edge[] p) {
@@ -68,7 +70,6 @@ public class Graph {
 		Queue<Integer> q = new LinkedList<>();
 		q.add(0);
 		visited[0] = true;
-		
 		while (!q.isEmpty()){
 			int u = q.poll();
 			List<Edge> edges = edgeList.get(u);
@@ -118,17 +119,26 @@ public class Graph {
 			this.f = f;
 		}
 		
-		public int getFlow() {
-			return (c == 0) ? -f.f : f.f;
+		public int getCapacity() {
+			if (c == 0) {
+				return f.f;
+			} else {
+				return c - f.f;
+			}
 		}
 		
-		public int getCapacity() {
-			return (c == 0) ? f.f : c - f.f;
+		public void addFlow(int f){
+			if (c == 0) {
+				System.out.println("Got Here!");
+				this.f.f -= f;
+			} else {
+				this.f.f += f;
+			}
 		}
 		
 		@Override
 		public String toString(){
-			return o + " -> " + d + ",  " + getFlow() + " of " + c; 
+			return o + " -> " + d; 
 		}
 		
 		@Override
